@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cdrojasm 🪅</title>
+    <style>
+        body {
+            font-family: 'Lucida Console', monospace;
+            background-color: #ffffff;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            color: #000000;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        section {
+            padding: 20px;
+            border-bottom: 1px solid #444;
+        }
+
+        .main_header {
+            width: 99vw;
+            height: 100vh;
+            padding: 0px;
+            margin: 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact {
+            text-align: center;
+        }
+
+        a {
+            color: #42a5f5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mis ensayos</h1>
+    <ul>
+        <!-- Aquí se listarán los ensayos -->
+        <li><a href="ensayos/ensayo1.html">Ensayo 1</a></li>
+        <li><a href="ensayos/ensayo2.html">Ensayo 2</a></li>
+        <li><a href="ensayos/ensayo3.html">Ensayo 3</a></li>
+        <!-- Agrega más ensayos según sea necesario -->
+    </ul>
+</body>
+</html>
+<script>
+    fetch('/ensayos')
+        .then(response => response.json())
+        .then(data => {
+            const ul = document.querySelector('ul');
+            data.forEach(ensayo => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = `ensayos/${ensayo}`;
+                a.textContent = ensayo.replace('.html', '');
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+        })
+        .catch(error => console.error('Error fetching ensayos:', error));
+</script>

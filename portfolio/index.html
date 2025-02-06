@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cdrojasm 🪅</title>
+    <style>
+        body {
+            font-family: 'Lucida Console', monospace;
+            background-color: #ffffff;
+            color: #000000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            color: #000000;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        section {
+            padding: 20px;
+            border-bottom: 1px solid #444;
+        }
+
+        .main_header {
+            width: 99vw;
+            height: 100vh;
+            padding: 0px;
+            margin: 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid #444;
+        }
+
+        .contact {
+            text-align: center;
+        }
+
+        a {
+            color: #42a5f5;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #f3f3f3;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+            max-width: 500px;
+        }
+
+        .progress {
+            height: 20px;
+            background-color: #000000;
+            width: 0;
+            transition: width 0.5s;
+            color: #ffffff;
+        }
+
+        .proyect_details {
+            font-family: lucida-Console, monospace;
+            font-size: small;
+            color: #555;
+            line-height: 0.85em;
+        }
+    </style>
+    <script>
+        const text = "Full Stack Developer";
+        let index = 0;
+        function typeEffect() {
+            if (index < text.length) {
+                document.getElementById("typewriter").innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeEffect, 100);
+            }
+        }
+        window.onload = typeEffect;
+    </script>
+    <script>
+        function animateProgressBar(progressBar, percentage) {
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= percentage) {
+                    clearInterval(interval);
+                } else {
+                    width++;
+                    progressBar.style.width = width + '%';
+                }
+            }, 10);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressBars = document.querySelectorAll('.progress-bar .progress');
+            progressBars.forEach((progressBar) => {
+                const percentage = parseInt(progressBar.style.width);
+                progressBar.style.width = '0%';
+                animateProgressBar(progressBar, percentage);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="main_header">
+            <svg width="720" height="140" xmlns="http://www.w3.org/2000/svg" fill="black">
+                <!-- C -->
+                <rect x="20" y="20" width="20" height="80" />
+                <rect x="40" y="10" width="40" height="20" />
+                <rect x="40" y="90" width="40" height="20" />
+                <!-- D -->
+                <rect x="90" y="10" width="20" height="100" />
+                <rect x="110" y="10" width="40" height="20" />
+                <rect x="150" y="30" width="20" height="60" />
+                <rect x="110" y="90" width="40" height="20" />
+                <!-- R -->
+                <rect x="180" y="10" width="20" height="100" />
+                <rect x="240" y="30" width="20" height="20" />
+                <rect x="200" y="10" width="40" height="20" />
+                <rect x="200" y="50" width="40" height="20" />
+                <rect x="240" y="70" width="20" height="20" />
+                <rect x="240" y="90" width="20" height="20" />
+                <!-- O -->
+                <rect x="290" y="10" width="40" height="20" />
+                <rect x="290" y="90" width="40" height="20" />
+                <rect x="270" y="20" width="20" height="80" />
+                <rect x="330" y="20" width="20" height="80" />
+                <!-- J -->
+                <rect x="380" y="10" width="40" height="20" />
+                <rect x="400" y="30" width="20" height="60" />
+                <rect x="380" y="90" width="20" height="20" />
+                <rect x="360" y="70" width="20" height="20" />
+                <!-- A -->
+                <rect x="430" y="30" width="20" height="80" />
+                <rect x="450" y="10" width="40" height="20" />
+                <rect x="490" y="30" width="20" height="80" />
+                <rect x="450" y="50" width="40" height="20" />
+                <!-- S -->
+                <rect x="540" y="10" width="60" height="20" />
+                <rect x="520" y="30" width="20" height="20" />
+                <rect x="520" y="50" width="80" height="20" />
+                <rect x="580" y="70" width="20" height="20" />
+                <rect x="520" y="90" width="60" height="20" />
+                <!-- M -->
+                <rect x="610" y="10" width="20" height="100" />
+                <rect x="630" y="30" width="20" height="20" />
+                <rect x="670" y="30" width="20" height="20" />
+                <rect x="650" y="50" width="20" height="20" />
+                <rect x="690" y="10" width="20" height="100" />
+            </svg>
+            <h2 id="typewriter">
+                </h1>
+
+                <nav>
+                    <a href="#about_me">About me</a>|
+                    <a href="#CV">CV</a>|
+                    <a href="#ensayos">Essays</a>|
+                    <a href="#thinkTank">Think thank</a>|
+                    <a href="#contacto">Contact</a>
+                </nav>
+        </div>
+        <section id="about_me">
+            <h2>Sobre mi</h2>
+            <p>Soy un desarrollador de software con +3 años de experiencia, vivo en bogotá Colombia, he trabajado
+                principalmente backend en python diseñando microservicios.</p>
+            <h3>He trabajado en:</h3>
+            <ul>
+
+                <li>Backend en Python 🐍</li>
+                <li>Backend en Golang 🐹</li>
+                <li>Backend en Java8 ☕</li>
+                <li>Frontend en ReactJS ⚛️ y Vanilla 🍦</li>
+                <li>Docker 🐳</li>
+                <li>Nginx 🌐</li>
+                <li>Motores de búsqueda 🔍 (Solr, Elastic Search, ZincSearch)</li>
+                <li>PostgreSQL 🐘, MySQL 🐬</li>
+                <li>Redis 🧠</li>
+                <li>LangChain 🔗</li>
+                <li>OpenAI 🤖</li>
+                <li>Chroma DB y Qdrant VectorStores 📊</li>
+            </ul>
+            <p>Soy un desarrollador de software con +3 años de experiencia, he trabajado principalmente con pyhton y js.
+                Diseño de software
+                con un enfoque en la arquitectura de microservicios. Actualmente, me interesa la integración de agentes
+                en aplicaciones SaaS, el emprendimiento y el software de código abierto.</p>
+            <p>Antes de dedicarme al software, realicé una maestría en eventos transitorios de corta duración en
+                sistemas electricos, entre 2019 y 2020, sin embargo, no la concluí 🤷‍♂️.
+                Trabajé desde 2019 como independiente y luego en una empresa de ingeniería eléctrica, principalmente
+                como residente de
+                múltiples obras por todo colombia (viaje muchisimo, <b>NO ES TAN GENIAL DESPUES DE 2 MESES</b>).</p>
+            <p>Además de mi pasión por el desarrollo de software, disfruto de los videojuegos. He completado juegos como
+                The Witcher 🧙‍♂️, Silent Hill 👻, Resident Evil 7 🧟, Golden Sun 🌞, y unas 4 versiones de Pokémon
+                🐱‍🐉, entre muchos otros. También me encanta cocinar 🍳, escuchar podcasts 🎧 y hacer planes con mi
+                familia 👨‍👩‍👧‍👦.</p>
+
+        </section>
+        <section id="cv">
+            <h2>Mi CV</h2>
+            <p>Puedes ver mi CV completo <a href="cv.pdf">aquí</a>.</p>
+        </section>
+
+        <section id="ensayos">
+            <h2>Ensayos</h2>
+            <p>Explora algunos de mis escritos y reflexiones sobre diversos temas.</p>
+            <ul>
+                <li><a href="essays/transicion-alimentaria.html">Transición Alimentaria</a></li>
+                <li><a href="essays/obsesion-energia-fusion.html">Mi Obsesión con la Industria de la Energía de
+                        Fusión</a></li>
+                <li><a href="essays/mi-historia.html">Mi Historia</a></li>
+                <li><a href="essays/10-preguntas-para-saber-si-no-deberias-tener-bebes.html">10 Preguntas para Saber si
+                        No Deberías Tener Bebés (Tengo uno)</a></li>
+                <li><a href="essays/resena-trilogia-problema-de-los-tres-cuerpos.html">Reseña de la Trilogía del
+                        Problema de los Tres Cuerpos</a></li>
+                <li><a href="essays/concierto-con-mi-papa-pink-floyd.html">Un Concierto con mi Papá <Pink Floyd></a>
+                </li>
+                <li><a href="essays/un-rolo-en-manizales.html">Un Rolo en Manizales: Cómo Estudié 7 Años en Otra Ciudad
+                        y Por Qué Amo Manizales</a></li>
+                <li><a href="essays/experiencia-con-organizaciones-del-estado-colombiano.html">Mi Experiencia con las
+                        Organizaciones del Estado Colombiano y Por Qué las Odio</a></li>
+                <li><a href="essay_list.html">...</a></li>
+            </ul>
+        </section>
+        <section id="thinkTank">
+            <h2>Think Tank</h2>
+            <p>En esta seccion puedes ver el estado de los proyectos en los cuales estoy trabajando actualmente.</p>
+            <ul>
+                <li>
+                    <h3>VSAdmin 🛠️</h3>
+                    <p class="proyect_details">Este proyecto tiene como objetivo crear un conjunto de herramientas para
+                        administrar almacenes de vectores de manera agnóstica al proveedor. Esto permite realizar
+                        migraciones, consultas y visualizaciones utilizando diferentes técnicas de reducción para
+                        vectores densos, entre otras funcionalidades. Algo como un clon de DBeaver para la gestión y
+                        visualización de estos almacenes de vectores.</p>
+                    <p>Etapa: MVP</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 15%;">15%</div>
+                    </div>
+
+                </li>
+                <li>
+                    <h3>normaCheck 📐</h3>
+                    <p class="proyect_details">Un Saas que permite a los ingenierios de disciplina verificar si sus
+                        memorias de calculo y planos estan dentro de la norma, realiza la lectura de planos y genera un
+                        reporte de no conformidades, recomendaciones y asignacion sobre un equipo de trabajo.</p>
+                    <p>Etapa: MVP</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 50%;">50%</div>
+                    </div>
+                </li>
+                <li>
+                    <h3>watti⚡</h3>
+                    <p class="proyect_details">Una forma de llevar el software para calculo de infraestructura electrica
+                        del standalone a la nube, Saas para ingenieros electricistas y de sistemas de potencia con toda
+                        una suit de componentes lista para dejar de lado los softwares obsoletos.</p>
+                    <p>Etapa: MVP</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 15%;">15%</div>
+                    </div>
+                </li>
+
+
+            </ul>
+        </section>
+
+        <section id="contacto">
+            <h2>Contacto</h2>
+            <p>Puedes escribirme a: <a href="mailto:cdrojasm@unal.edu.co">cdrojasm@unal.edu.co</a></p>
+            <p>Puedes enviarme un DM en <a href="https://www.linkedin.com/in/carlos-david-rojas-monta%C3%B1o-446721137/"
+                    target="_blank">LinkedIn</a>.</p>
+            <p>También puedes encontrar algunos de mis proyectos públicos en <a href="https://github.com/cdrojasm"
+                    target="_blank">GitHub</a>.</p>
+            <p>Además, puedes buscar algunos de mis artículos científicos en <a
+                    href="https://scholar.google.com/citations?user=GEVO5lcAAAAJ&hl=es&oi=ao" target="_blank">Google
+                    Scholar</a>, son interesantes.</p>
+        </section>
+    </div>
+</body>
+
+</html>
