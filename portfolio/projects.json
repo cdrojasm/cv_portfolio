@@ -1,0 +1,29 @@
+[
+    {
+        "title": "VSAdmin 🛠️",
+        "details": {
+            "en": "This project aims to create a set of tools to manage vector stores in a provider-agnostic way. This allows for migrations, queries, and visualizations using different reduction techniques for dense vectors, among other functionalities. Something like a DBeaver clone for managing and visualizing these vector stores.",
+            "es": "Este proyecto tiene como objetivo crear un conjunto de herramientas para administrar almacenes de vectores de manera agnóstica al proveedor. Esto permite realizar migraciones, consultas y visualizaciones utilizando diferentes técnicas de reducción para vectores densos, entre otras funcionalidades. Algo como un clon de DBeaver para la gestión y visualización de estos almacenes de vectores."
+        },
+        "stage": "MVP",
+        "progress": "15"
+    },
+    {
+        "title": "normaCheck 📐",
+        "details": {
+            "en": "A SaaS that allows discipline engineers to verify if their calculation reports and plans are within the standard, reads the plans and generates a report of non-conformities, recommendations, and assignments over a team.",
+            "es": "Un Saas que permite a los ingenierios de disciplina verificar si sus memorias de calculo y planos estan dentro de la norma, realiza la lectura de planos y genera un reporte de no conformidades, recomendaciones y asignacion sobre un equipo de trabajo."
+        },
+        "stage": "MVP",
+        "progress": "50"
+    },
+    {
+        "title": "watti⚡",
+        "details": {
+            "en": "A way to take electrical infrastructure calculation software from standalone to the cloud, SaaS for electrical and power systems engineers with a suite of components ready to leave obsolete software behind.",
+            "es": "Una forma de llevar el software para calculo de infraestructura electrica del standalone a la nube, Saas para ingenieros electricistas y de sistemas de potencia con toda una suit de componentes lista para dejar de lado los softwares obsoletos."
+        },
+        "stage": "MVP",
+        "progress": "15"
+    }
+]
