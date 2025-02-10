@@ -6,24 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cdrojasm 🪅</title>
     <style>
+        html {
+            scroll-behavior: smooth
+        }
+
         body {
             font-family: 'Lucida Console', monospace;
             background-color: #ffffff;
             color: #000000;
             margin: 0;
             padding: 0;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            max-width: 98vw;
         }
 
         .container {
-            width: 100%;
+            width: 90%;
             height: 100%;
-        }
-
-        header {
-            text-align: center;
-            padding: 20px 0;
-            font-size: 24px;
-            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 98vw;
         }
 
         nav {
@@ -35,16 +41,32 @@
             color: #000000;
             text-decoration: none;
             margin: 0 15px;
-            font-size: 18px;
+            font-size: 20px;
+        }
+
+        nav a.separator {
+            margin: 0px 0px;
+            font-size: 25px;
+        }
+
+        nav a.highlighted {
+            color: #ffbf00;
+            margin: 0px 0px;
+        }
+
+        .highlighted {
+            color: #ffbf00;
         }
 
         section {
             padding: 20px;
             border-bottom: 1px solid #444;
+            width: 100%;
+            max-width: 97vw;
         }
 
         .main_header {
-            width: 99vw;
+            width: 98vw;
             height: 100vh;
             padding: 0px;
             margin: 0px;
@@ -55,12 +77,16 @@
             border-bottom: 1px solid #444;
         }
 
-        .contact {
-            text-align: center;
+        a.link {
+            color: #42a5f5;
         }
 
-        a {
+        a:visited {
             color: #42a5f5;
+        }
+
+        a.no_visited:visited{
+            color: #000000;
         }
 
         .progress-bar {
@@ -122,11 +148,67 @@
             });
         });
     </script>
+    <script>
+        function getLangFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('lang') || 'es';
+        }
+        const lang = getLangFromUrl();
+    </script>
+    <script>
+        const sectionTitles = {
+            "es": {
+                "aboutMe": "Sobre mi",
+                "cv": "Mi CV",
+                "essays": "Ensayos",
+                "projects": "Proyectos",
+                "contacto": "Contacto"
+            },
+            "en": {
+                "aboutMe": "About me",
+                "cv": "CV",
+                "essays": "Essays",
+                "projects": "Projects",
+                "contacto": "Contact"
+            }
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
     <div class="container">
         <div class="main_header">
+            <div style="position: absolute; top: 10px; right: 10px;">
+                <a id="es_lang_button" class="no_visited" href="?lang=es" style="margin-right: 10px;">ES</a> | 
+                <a id="en_lang_button" class="no_visited" href="?lang=en" style="margin-left: 10px;">EN</a>
+            </div>
+            <script>
+                $(document).ready(function () {
+                    const lang = getLangFromUrl();
+                    const normalStyle = {
+                        "font-weigth":"normal", 
+                        "font-size":"17px", 
+                        "background-color":"none",
+                        "border-radius":"none", 
+                        "padding":"4px"
+                    }
+                    const selectedStyle = {
+                        "font-weigth":"bold", 
+                        "font-size":"20px", 
+                        "background-color":"#DDD",
+                        "border-radius":"3px", 
+                        "padding":"4px"
+                    }
+                    if (lang === 'es') {
+                        $('#es_lang_button').css(selectedStyle);
+                        $('#en_lang_button').css(normalStyle);
+                    } else {
+                        $('#en_lang_button').css(selectedStyle);
+                        $('#es_lang_button').css(normalStyle);
+                    }
+                });
+            </script>
             <svg width="720" height="140" xmlns="http://www.w3.org/2000/svg" fill="black">
                 <!-- C -->
                 <rect x="20" y="20" width="20" height="80" />
@@ -174,128 +256,227 @@
             </svg>
             <h2 id="typewriter">
                 </h1>
-
                 <nav>
-                    <a href="#about_me">About me</a>|
-                    <a href="#CV">CV</a>|
-                    <a href="#ensayos">Essays</a>|
-                    <a href="#thinkTank">Think thank</a>|
-                    <a href="#contacto">Contact</a>
+                    <a class="no_visited" href="#aboutMe">About me</a>
+                    <a class="separator">|</a>
+                    <a class="no_visited" href="#cv">CV</a>
+                    <a class="separator">|</a>
+                    <a class="no_visited" href="#essays">Essays</a>
+                    <a class="separator">|</a>
+                    <a class="no_visited" href="#projects" style="margin-right: 0px;">Projects <a class="highlighted">(!!) </a></a>
+                    <a class="separator">|</a>
+                    <a class="no_visited" href="#contacto">Contact</a>
+                    <script>
+                        $(document).ready(function () {
+                            const titles = sectionTitles[lang];
+                            $('nav a[href="#aboutMe"]').text(titles.aboutMe);
+                            $('nav a[href="#cv"]').text(titles.cv);
+                            $('nav a[href="#essays"]').text(titles.essays);
+                            $('nav a[href="#projects"]').html(titles.projects + ' <a class="highlighted">(!!)</a>');
+                            $('nav a[href="#contacto"]').text(titles.contacto);
+                        });
+                    </script>
                 </nav>
         </div>
-        <section id="about_me">
-            <h2>Sobre mi</h2>
-            <p>Soy un desarrollador de software con +3 años de experiencia, vivo en bogotá Colombia, he trabajado
-                principalmente backend en python diseñando microservicios.</p>
-            <h3>He trabajado en:</h3>
-            <ul>
+        <section id="aboutMe">
+            <script>
+                const aboutMeContent = {
+                    "es": `
+                        <h2>Sobre mi</h2>
+                        <p>Soy un desarrollador de software con +3 años de experiencia, vivo en Bogotá, Colombia, he trabajado
+                            principalmente backend en Python diseñando microservicios.</p>
+                        <h3>He trabajado en:</h3>
+                        <ul>
+                            <li>Backend en Python 🐍</li>
+                            <li>Backend en Golang 🐹</li>
+                            <li>Backend en Java8 ☕</li>
+                            <li>Frontend en ReactJS ⚛️ y Vanilla 🍦</li>
+                            <li>Docker 🐳</li>
+                            <li>Nginx 🌐</li>
+                            <li>Motores de búsqueda 🔍 (Solr, Elastic Search, ZincSearch)</li>
+                            <li>PostgreSQL 🐘, MySQL 🐬</li>
+                            <li>Redis 🧠</li>
+                            <li>LangChain 🔗</li>
+                            <li>OpenAI 🤖</li>
+                            <li>Chroma DB y Qdrant VectorStores 📊</li>
+                        </ul>
+                        <p>Soy un desarrollador de software con +3 años de experiencia, he trabajado principalmente con Python y JS.
+                            Diseño de software
+                            con un enfoque en la arquitectura de microservicios. Actualmente, me interesa la integración de agentes
+                            en aplicaciones SaaS, el emprendimiento y el software de código abierto.</p>
+                        <p>Antes de dedicarme al software, realicé una maestría en eventos transitorios de corta duración en
+                            sistemas eléctricos, entre 2019 y 2020, sin embargo, no la concluí 🤷‍♂️.
+                            Trabajé desde 2019 como independiente y luego en una empresa de ingeniería eléctrica, principalmente
+                            como residente de
+                            múltiples obras por todo Colombia (viajé muchísimo, <b>NO ES TAN GENIAL DESPUÉS DE 2 MESES</b>).</p>
+                        <p>Además de mi pasión por el desarrollo de software, disfruto de los videojuegos. He completado juegos como
+                            The Witcher 🧙‍♂️, Silent Hill 👻, Resident Evil 7 🧟, Golden Sun 🌞, y unas 4 versiones de Pokémon
+                            🐱‍🐉, entre muchos otros. También me encanta cocinar 🍳, escuchar podcasts 🎧 y hacer planes con mi
+                            familia 👨‍👩‍👧‍👦.</p>
+                    `,
+                    "en": `
+                        <h2>About me</h2>
+                        <p>I am a software developer with over 3 years of experience, living in Bogotá, Colombia. I have mainly worked
+                            on backend development in Python designing microservices.</p>
+                        <h3>I have worked on:</h3>
+                        <ul>
+                            <li>Backend in Python 🐍</li>
+                            <li>Backend in Golang 🐹</li>
+                            <li>Backend in Java8 ☕</li>
+                            <li>Frontend in ReactJS ⚛️ and Vanilla 🍦</li>
+                            <li>Docker 🐳</li>
+                            <li>Nginx 🌐</li>
+                            <li>Search engines 🔍 (Solr, Elastic Search, ZincSearch)</li>
+                            <li>PostgreSQL 🐘, MySQL 🐬</li>
+                            <li>Redis 🧠</li>
+                            <li>LangChain 🔗</li>
+                            <li>OpenAI 🤖</li>
+                            <li>Chroma DB and Qdrant VectorStores 📊</li>
+                        </ul>
+                        <p>I am a software developer with over 3 years of experience, mainly working with Python and JS.
+                            Software design
+                            with a focus on microservices architecture. Currently, I am interested in integrating agents
+                            into SaaS applications, entrepreneurship, and open-source software.</p>
+                        <p>Before dedicating myself to software, I pursued a master's degree in short-duration transient events in
+                            electrical systems, between 2019 and 2020, however, I did not complete it 🤷‍♂️.
+                            I worked independently since 2019 and then in an electrical engineering company, mainly
+                            as a resident of
+                            multiple projects throughout Colombia (I traveled a lot, <b>IT'S NOT THAT GREAT AFTER 2 MONTHS</b>).</p>
+                        <p>Besides my passion for software development, I enjoy video games. I have completed games like
+                            The Witcher 🧙‍♂️, Silent Hill 👻, Resident Evil 7 🧟, Golden Sun 🌞, and about 4 versions of Pokémon
+                            🐱‍🐉, among many others. I also love cooking 🍳, listening to podcasts 🎧, and making plans with my
+                            family 👨‍👩‍👧‍👦.</p>
+                    `
+                };
 
-                <li>Backend en Python 🐍</li>
-                <li>Backend en Golang 🐹</li>
-                <li>Backend en Java8 ☕</li>
-                <li>Frontend en ReactJS ⚛️ y Vanilla 🍦</li>
-                <li>Docker 🐳</li>
-                <li>Nginx 🌐</li>
-                <li>Motores de búsqueda 🔍 (Solr, Elastic Search, ZincSearch)</li>
-                <li>PostgreSQL 🐘, MySQL 🐬</li>
-                <li>Redis 🧠</li>
-                <li>LangChain 🔗</li>
-                <li>OpenAI 🤖</li>
-                <li>Chroma DB y Qdrant VectorStores 📊</li>
-            </ul>
-            <p>Soy un desarrollador de software con +3 años de experiencia, he trabajado principalmente con pyhton y js.
-                Diseño de software
-                con un enfoque en la arquitectura de microservicios. Actualmente, me interesa la integración de agentes
-                en aplicaciones SaaS, el emprendimiento y el software de código abierto.</p>
-            <p>Antes de dedicarme al software, realicé una maestría en eventos transitorios de corta duración en
-                sistemas electricos, entre 2019 y 2020, sin embargo, no la concluí 🤷‍♂️.
-                Trabajé desde 2019 como independiente y luego en una empresa de ingeniería eléctrica, principalmente
-                como residente de
-                múltiples obras por todo colombia (viaje muchisimo, <b>NO ES TAN GENIAL DESPUES DE 2 MESES</b>).</p>
-            <p>Además de mi pasión por el desarrollo de software, disfruto de los videojuegos. He completado juegos como
-                The Witcher 🧙‍♂️, Silent Hill 👻, Resident Evil 7 🧟, Golden Sun 🌞, y unas 4 versiones de Pokémon
-                🐱‍🐉, entre muchos otros. También me encanta cocinar 🍳, escuchar podcasts 🎧 y hacer planes con mi
-                familia 👨‍👩‍👧‍👦.</p>
-
+                document.getElementById('aboutMe').innerHTML = aboutMeContent[lang];
+            </script>
         </section>
         <section id="cv">
-            <h2>Mi CV</h2>
-            <p>Puedes ver mi CV completo <a href="cv.pdf">aquí</a>.</p>
+            <script>
+                const cvContent = {
+                    "es": `
+                        <h2>Mi CV</h2>
+                        <p>Puedes ver mi CV completo <a class='link' href="cv.html">aquí</a> o descargarlo <a class='link' download="cv_cdrm.pdf" href="cv.pdf">aquí</a>.</p>
+                    `,
+                    "en": `
+                        <h2>CV</h2>
+                        <p>You can view my full CV <a class='link' href="cv.html">here</a> or download it <a class='link' download="cv_cdrm.pdf" href="cv.pdf">here</a>.</p>
+                    `
+                };
+
+                document.getElementById('cv').innerHTML = cvContent[lang];
+            </script>
         </section>
 
-        <section id="ensayos">
-            <h2>Ensayos</h2>
-            <p>Explora algunos de mis escritos y reflexiones sobre diversos temas.</p>
-            <ul>
-                <li><a href="essays/transicion-alimentaria.html">Transición Alimentaria</a></li>
-                <li><a href="essays/obsesion-energia-fusion.html">Mi Obsesión con la Industria de la Energía de
-                        Fusión</a></li>
-                <li><a href="essays/mi-historia.html">Mi Historia</a></li>
-                <li><a href="essays/10-preguntas-para-saber-si-no-deberias-tener-bebes.html">10 Preguntas para Saber si
-                        No Deberías Tener Bebés (Tengo uno)</a></li>
-                <li><a href="essays/resena-trilogia-problema-de-los-tres-cuerpos.html">Reseña de la Trilogía del
-                        Problema de los Tres Cuerpos</a></li>
-                <li><a href="essays/concierto-con-mi-papa-pink-floyd.html">Un Concierto con mi Papá <Pink Floyd></a>
-                </li>
-                <li><a href="essays/un-rolo-en-manizales.html">Un Rolo en Manizales: Cómo Estudié 7 Años en Otra Ciudad
-                        y Por Qué Amo Manizales</a></li>
-                <li><a href="essays/experiencia-con-organizaciones-del-estado-colombiano.html">Mi Experiencia con las
-                        Organizaciones del Estado Colombiano y Por Qué las Odio</a></li>
-                <li><a href="essay_list.html">...</a></li>
-            </ul>
+        <section id="essays">
+            <h2 id="essaysTitle"></h2>
+            <p id="essaysDescription"></p>
+            <ul></ul>
+            <script>
+                const essaysContent = {
+                    "es": {
+                        "title": "Ensayos",
+                        "description": "Explora algunos de mis escritos y reflexiones sobre diversos temas."
+                    },
+                    "en": {
+                        "title": "Essays",
+                        "description": "Explore some of my writings and reflections on various topics."
+                    }
+                };
+
+                document.getElementById('essaysTitle').innerText = essaysContent[lang].title;
+                document.getElementById('essaysDescription').innerText = essaysContent[lang].description;
+            </script>
+            <script>
+                
+                fetch('essays.json')
+                    .then(response => response.json())
+                    .then(essays => {
+                        let essaysList_ = essays;
+                        essays.sort((a, b) => new Date(b.publish_date) - new Date(a.publish_date));
+                        const newestEssays = essays.slice(0, 10);
+                        let essaysList = document.querySelector('#essays ul');
+                        newestEssays.forEach(essay => {
+                            const essayElement = document.createElement('li');
+                            essayElement.innerHTML = `<a class='link' href="${essay.url}">${essay.title}</a>`;
+                            essaysList.appendChild(essayElement);
+                        });
+                        if (essaysList === null || essaysList.length <= 0) {
+                            const essaysList = document.querySelector('#essays ul');
+                            const noEssaysElement = document.createElement('li');
+                            noEssaysElement.innerText = 'No essays found';
+                            essaysList.appendChild(noEssaysElement);
+                        } else {
+                            if (essaysList_.length < 9) {return ;}
+                            const essaysList = document.querySelector('#essays ul');
+                            const essayElement = document.createElement('li');
+                            essayElement.innerHTML = `<a class='link' href="essayList.html">...</a>`;
+                            essaysList.appendChild(essayElement);
+                        }
+                    })
+                    .catch(error => console.error('Error fetching essays:', error));
+            </script>
         </section>
-        <section id="thinkTank">
-            <h2>Think Tank</h2>
-            <p>En esta seccion puedes ver el estado de los proyectos en los cuales estoy trabajando actualmente.</p>
-            <ul>
-                <li>
-                    <h3>VSAdmin 🛠️</h3>
-                    <p class="proyect_details">Este proyecto tiene como objetivo crear un conjunto de herramientas para
-                        administrar almacenes de vectores de manera agnóstica al proveedor. Esto permite realizar
-                        migraciones, consultas y visualizaciones utilizando diferentes técnicas de reducción para
-                        vectores densos, entre otras funcionalidades. Algo como un clon de DBeaver para la gestión y
-                        visualización de estos almacenes de vectores.</p>
-                    <p>Etapa: MVP</p>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 15%;">15%</div>
-                    </div>
+        <section id="projects">
+            <h2>Mis proyectos</h2>
+            <script>
+                const thinkTankContent = {
+                    "es": `
+                        <h2>Proyectos</h2>
+                        <p>En esta sección puedes ver el estado de los proyectos en los cuales estoy trabajando actualmente.</p>
+                    `,
+                    "en": `
+                        <h2>Projects</h2>
+                        <p>In this section, you can see the status of the projects I am currently working on.</p>
+                    `
+                };
 
-                </li>
-                <li>
-                    <h3>normaCheck 📐</h3>
-                    <p class="proyect_details">Un Saas que permite a los ingenierios de disciplina verificar si sus
-                        memorias de calculo y planos estan dentro de la norma, realiza la lectura de planos y genera un
-                        reporte de no conformidades, recomendaciones y asignacion sobre un equipo de trabajo.</p>
-                    <p>Etapa: MVP</p>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 50%;">50%</div>
-                    </div>
-                </li>
-                <li>
-                    <h3>watti⚡</h3>
-                    <p class="proyect_details">Una forma de llevar el software para calculo de infraestructura electrica
-                        del standalone a la nube, Saas para ingenieros electricistas y de sistemas de potencia con toda
-                        una suit de componentes lista para dejar de lado los softwares obsoletos.</p>
-                    <p>Etapa: MVP</p>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 15%;">15%</div>
-                    </div>
-                </li>
-
-
-            </ul>
+                document.getElementById('projects').innerHTML = thinkTankContent[lang];
+            </script>
+            <ul></ul>
+            <script>
+                fetch('projects.json')
+                    .then(response => response.json())
+                    .then(projectsToRender => {
+                        projectsToRender.forEach(project => {
+                            const projectElement = document.createElement('li');
+                            projectElement.innerHTML = `
+                                <h3>${project.title}</h3>
+                                <p class="proyect_details">${project.details[lang]}</p>
+                                <p>Etapa: ${project.stage}</p>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: ${project.progress}%;">${project.progress}%</div>
+                                </div>
+                            `;
+                            document.querySelector('#projects ul').appendChild(projectElement);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching projects:', error));
+            </script>
         </section>
 
         <section id="contacto">
-            <h2>Contacto</h2>
-            <p>Puedes escribirme a: <a href="mailto:cdrojasm@unal.edu.co">cdrojasm@unal.edu.co</a></p>
-            <p>Puedes enviarme un DM en <a href="https://www.linkedin.com/in/carlos-david-rojas-monta%C3%B1o-446721137/"
-                    target="_blank">LinkedIn</a>.</p>
-            <p>También puedes encontrar algunos de mis proyectos públicos en <a href="https://github.com/cdrojasm"
-                    target="_blank">GitHub</a>.</p>
-            <p>Además, puedes buscar algunos de mis artículos científicos en <a
-                    href="https://scholar.google.com/citations?user=GEVO5lcAAAAJ&hl=es&oi=ao" target="_blank">Google
-                    Scholar</a>, son interesantes.</p>
+            <script>
+                const contactoContent = {
+                    "es": `
+                        <h2>Contacto</h2>
+                        <p>Puedes escribirme a: <a class='link' href="mailto:cdrojasm@unal.edu.co">cdrojasm@unal.edu.co</a></p>
+                        <p>Puedes enviarme un DM en <a class='link' href="https://www.linkedin.com/in/carlos-david-rojas-monta%C3%B1o-446721137/" target="_blank">LinkedIn</a>.</p>
+                        <p>También puedes encontrar algunos de mis proyectos públicos en <a class='link' href="https://github.com/cdrojasm" target="_blank">GitHub</a>.</p>
+                        <p>Además, puedes buscar algunos de mis artículos científicos en <a class='link' href="https://scholar.google.com/citations?user=GEVO5lcAAAAJ&hl=es&oi=ao" target="_blank">Google Scholar</a>, son interesantes.</p>
+                    `,
+                    "en": `
+                        <h2>Contact</h2>
+                        <p>You can write to me at: <a class='link' href="mailto:cdrojasm@unal.edu.co">cdrojasm@unal.edu.co</a></p>
+                        <p>You can send me a DM on <a class='link' href="https://www.linkedin.com/in/carlos-david-rojas-monta%C3%B1o-446721137/" target="_blank">LinkedIn</a>.</p>
+                        <p>You can also find some of my public projects on <a class='link' href="https://github.com/cdrojasm" target="_blank">GitHub</a>.</p>
+                        <p>Additionally, you can find some of my scientific articles on <a class='link' href="https://scholar.google.com/citations?user=GEVO5lcAAAAJ&hl=es&oi=ao" target="_blank">Google Scholar</a>, they are interesting.</p>
+                    `
+                };
+
+                document.getElementById('contacto').innerHTML = contactoContent[lang];
+            </script>
         </section>
     </div>
 </body>
