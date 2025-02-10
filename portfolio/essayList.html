@@ -61,6 +61,22 @@
             color: #42a5f5;
         }
     </style>
+    <script>
+        fetch('./essays')
+            .then(response => response.json())
+            .then(data => {
+                const ul = document.querySelector('ul');
+                data.forEach(ensayo => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = `ensayos/${ensayo}`;
+                    a.textContent = ensayo.replace('.html', '');
+                    li.appendChild(a);
+                    ul.appendChild(li);
+                });
+            })
+            .catch(error => console.error('Error fetching ensayos:', error));
+    </script>
 </head>
 <body>
     <h1>Mis ensayos</h1>
@@ -73,19 +89,3 @@
     </ul>
 </body>
 </html>
-<script>
-    fetch('/ensayos')
-        .then(response => response.json())
-        .then(data => {
-            const ul = document.querySelector('ul');
-            data.forEach(ensayo => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = `ensayos/${ensayo}`;
-                a.textContent = ensayo.replace('.html', '');
-                li.appendChild(a);
-                ul.appendChild(li);
-            });
-        })
-        .catch(error => console.error('Error fetching ensayos:', error));
-</script>
